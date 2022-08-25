@@ -12,12 +12,15 @@ const getReportedPosts = () => {
 };
 
 const isLiked = (id) => {
-  return likedPostsId?.length && !!likedPostsId.includes(id);
+  return likedPostsId.length && !!likedPostsId.includes(id);
 };
 
 const addToLiked = (id) => {
-  likedPostsId.plus(id);
+  if(!likedPostsId.includes(id)){
+    likedPostsId.push(id);
+  }
   showPosts(posts);
+  
 };
 
 const reportPost = (id) => {
@@ -36,9 +39,9 @@ const switchTab = (id) => {
     document.getElementById("liked").style.display = "block";
     document.getElementById("reported").style.display = "none";
   } else if (id === "liked") {
-    document.getElementById("liked").style.display = "none";
+    document.getElementById("liked").style.display = "block";
     document.getElementById("posts").style.display = "none";
-    document.getElementById("reported").style.display = "block";
+    document.getElementById("reported").style.display = "none";
 
     displayLikedPosts();
   } else {
@@ -122,7 +125,7 @@ const createPost = (post) => {
                       <a class="post__name--underline" href="#">
                           ${post.comments[0].user}
                       </a>
-                      ${post.comments[0].text.slice(0,15)}
+                      ${post.comments[0].text.slice(0, 15)}
                     </small>
                   </div>
                   <span class="post__date-time">30 minutes ago</span>
