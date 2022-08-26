@@ -16,11 +16,11 @@ const isLiked = (id) => {
 };
 
 const addToLiked = (id) => {
-  if(!likedPostsId.includes(id)){
+  if (!likedPostsId.includes(id)) {
     likedPostsId.push(id);
   }
   showPosts(posts);
-  
+
 };
 
 const reportPost = (id) => {
@@ -37,16 +37,16 @@ const switchTab = (id) => {
   if (id === "posts") {
     document.getElementById("posts").style.display = "grid";
     document.getElementById("liked").style.display = "block";
-    document.getElementById("reported").style.display = "none";
+    document.getElementById("reported").style.display = "block";
   } else if (id === "liked") {
     document.getElementById("liked").style.display = "block";
-    document.getElementById("posts").style.display = "none";
+    document.getElementById("posts").style.display = "block";
     document.getElementById("reported").style.display = "none";
 
     displayLikedPosts();
   } else {
     document.getElementById("reported").style.display = "block";
-    document.getElementById("posts").style.display = "none";
+    document.getElementById("posts").style.display = "block";
     document.getElementById("liked").style.display = "none";
 
     displayReportedPosts();
@@ -161,10 +161,11 @@ const displayReportedPosts = () => {
   });
 };
 
-const loadPosts = async () => {
-  let data = await fetch('../data/posts.json');
-  posts = await data.json();
-  showPosts(posts);
+const loadPosts = () => {
+  fetch('../data/posts.json')
+    .then(res => res.json())
+    .then(data => showPosts(data))
+
 }
 
 loadPosts();
